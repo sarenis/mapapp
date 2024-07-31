@@ -1,12 +1,11 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: gray;
+    background-color: black;
 
 }
 
 .container {
-    margin: 20px;
-    border: 1px solid gray;
+    border: 1px solid orange;
     background-color: white;
 }
 
