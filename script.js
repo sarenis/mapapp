@@ -98,23 +98,18 @@ function handleGeolocationError() {
     alert("Не вдалося отримати геопозицію.");
 }
 
-function getRandomPoint(center, radius) {
-    const angle = Math.random() * Math.PI * 2;
-    const distance = Math.random() * radius;
-    const dx = distance * Math.cos(angle);
-    const dy = distance * Math.sin(angle);
-    const earthRadius = 6371;
-    const newLat = center[0] + (dy / earthRadius) * (180 / Math.PI);
-    const newLng = center[1] + (dx / earthRadius) * (180 / Math.PI) / Math.cos(center[0] * Math.PI / 180);
-    return [newLat, newLng];
-}
-
 function generateRandomPoint() {
     if (randomMarker) {
         map.removeLayer(randomMarker);
     }
 
     let radiusKm = parseFloat(document.getElementById('radius').value);
+
+    // Переконуємося, що радіус не менше 4 км
+    if (isNaN(radiusKm) || radiusKm < 4) {
+        radiusKm = 4;
+        document.getElementById('radius').value = radiusKm;
+    }
 
     const randomPoint = getRandomPoint(userLocation, radiusKm);
 
@@ -124,6 +119,18 @@ function generateRandomPoint() {
 
     map.setView(randomPoint, 13);
 }
+
+function getRandomPoint(center, minRadiusKm) {
+    const angle = Math.random() * Math.PI * 2;
+    const distance = minRadiusKm; // Встановлюємо відстань на мінімально допустиму
+    const dx = distance * Math.cos(angle);
+    const dy = distance * Math.sin(angle);
+    const earthRadius = 6371; // Радіус Землі в км
+    const newLat = center[0] + (dy / earthRadius) * (180 / Math.PI);
+    const newLng = center[1] + (dx / earthRadius) * (180 / Math.PI) / Math.cos(center[0] * Math.PI / 180);
+    return [newLat, newLng];
+}
+
 
 function checkProximity() {
     if (!randomMarker) return;
