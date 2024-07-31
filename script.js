@@ -147,3 +147,27 @@ function onReachedRandomPoint() {
     randomMarker = null;
 }
 
+function logout() {
+    // Видаляємо інформацію про поточного користувача
+    localStorage.removeItem("currentUser");
+
+    // Показуємо форму реєстрації та ховаємо інші елементи
+    document.getElementById('registration').style.display = 'block';
+    document.getElementById('user-info').style.display = 'none';
+    document.getElementById('map').style.display = 'none';
+    document.getElementById('controls').style.display = 'none';
+
+    // Якщо є спостереження за геопозицією, зупиняємо його
+    if (watchId) {
+        navigator.geolocation.clearWatch(watchId);
+        watchId = null;
+    }
+
+    // Видаляємо маркер випадкової точки, якщо він є
+    if (randomMarker) {
+        map.removeLayer(randomMarker);
+        randomMarker = null;
+    }
+}
+
+
