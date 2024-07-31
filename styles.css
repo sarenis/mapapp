@@ -31,7 +31,7 @@ body {
 
 .container {
     border: 1px solid orange;
-    background-color: white;
+    background-color: gray;
 }
 
 #registration, #user-info, #controls, #user-list {
