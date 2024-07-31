@@ -3,39 +3,49 @@ let userMarker;
 let randomMarker;
 let routeControl;
 let userLocation;
+let watchId;
 
+// Ініціалізація карти та отримання поточної позиції користувача
 navigator.geolocation.getCurrentPosition(position => {
     const { latitude, longitude } = position.coords;
     userLocation = [latitude, longitude];
 
-    // Ініціалізація карти з позицією користувача
-    map = L.map('map').setView(userLocation, 13);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19
-    }).addTo(map);
-
-    // Додаємо маркер для поточної локації користувача
-    userMarker = L.marker(userLocation).addTo(map)
-        .bindPopup('You are here!')
-        .openPopup();
-
+    initializeMap(userLocation);
 }, () => {
-    // Якщо користувач відмовився надати геопозицію, використовуємо значення за замовчуванням
     const defaultLat = 51.505;
     const defaultLng = -0.09;
     userLocation = [defaultLat, defaultLng];
 
-    map = L.map('map').setView(userLocation, 13);
+    initializeMap(userLocation);
+});
+
+function initializeMap(location) {
+    map = L.map('map').setView(location, 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19
     }).addTo(map);
 
-    userMarker = L.marker(userLocation).addTo(map)
+    userMarker = L.marker(location).addTo(map)
         .bindPopup('You are here!')
         .openPopup();
-});
+
+    // Почати відслідковувати позицію користувача
+    watchId = navigator.geolocation.watchPosition(updateUserLocation, handleGeolocationError);
+}
+
+function updateUserLocation(position) {
+    const { latitude, longitude } = position.coords;
+    userLocation = [latitude, longitude];
+
+    userMarker.setLatLng(userLocation);
+
+    checkProximity();
+}
+
+function handleGeolocationError() {
+    alert("Не вдалося отримати геопозицію.");
+}
 
 function getRandomPoint(center, radius) {
     const angle = Math.random() * Math.PI * 2;
@@ -49,7 +59,6 @@ function getRandomPoint(center, radius) {
 }
 
 function generateRandomPoint() {
-    // Видалення попереднього маршруту та маркера
     if (randomMarker) {
         map.removeLayer(randomMarker);
     }
@@ -60,7 +69,6 @@ function generateRandomPoint() {
 
     let radiusKm = parseFloat(document.getElementById('radius').value);
     
-    // Перевірка мінімального радіуса
     if (radiusKm < 4) {
         alert("Мінімальний радіус становить 4 км");
         radiusKm = 4;
@@ -88,4 +96,20 @@ function buildRoute() {
         ],
         routeWhileDragging: true
     }).addTo(map);
+}
+
+function checkProximity() {
+    if (!randomMarker) return;
+
+    const userLatLng = L.latLng(userLocation[0], userLocation[1]);
+    const randomLatLng = randomMarker.getLatLng();
+
+    if (userLatLng.distanceTo(randomLatLng) < 50) { // 50 метрів для точності
+        onReachedRandomPoint();
+    }
+}
+
+function onReachedRandomPoint() {
+    alert("Вітаємо! Ви досягли випадкової точки.");
+    // Можна додати інші дії тут
 }
