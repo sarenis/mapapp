@@ -46,15 +46,6 @@ input[type="text"], input[type="number"] {
     box-sizing: border-box;
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: yellow;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
 button:hover {
     background-color: #45a049;
