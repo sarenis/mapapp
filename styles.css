@@ -4,6 +4,7 @@ body {
 }
 
 .container {
+    margin: 20px auto;
     border: 1px solid gray;
     background-color: #AAAAAA;
 }
@@ -14,6 +15,7 @@ body {
 }
 
 #map {
+    margin: 20px auto;
     width: 100%;
     height: 800px;
 }
