@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: black;
+    background-color: white;
 
 }
 .btn1 {
@@ -8,7 +8,7 @@ body {
     padding: 10px;
     background-color: green;
     color: white;
-    border: 10px solid gray;
+    border: 5px solid black;
     cursor: pointer;
     
 }
