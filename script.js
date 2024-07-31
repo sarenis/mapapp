@@ -5,7 +5,6 @@ let routeControl;
 let userLocation;
 let watchId;
 
-// Ініціалізація карти та отримання поточної позиції користувача
 navigator.geolocation.getCurrentPosition(position => {
     const { latitude, longitude } = position.coords;
     userLocation = [latitude, longitude];
@@ -39,9 +38,9 @@ function updateUserLocation(position) {
     userLocation = [latitude, longitude];
 
     userMarker.setLatLng(userLocation);
+    map.panTo(userLocation);  // Оновлення центру карти до поточної позиції користувача
 
     checkProximity();
-    console.log('Updated');
 }
 
 function handleGeolocationError() {
@@ -107,6 +106,6 @@ function checkProximity() {
 }
 
 function onReachedRandomPoint() {
-    console.log("Вітаємо! Ви досягли випадкової точки.");
+    alert("Вітаємо! Ви досягли випадкової точки.");
     // Можна додати інші дії тут
 }
