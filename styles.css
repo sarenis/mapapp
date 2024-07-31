@@ -49,6 +49,7 @@ body {
 }
 
 input[type="text"], input[type="number"] {
+    background-color: #686868;
     border: 1px solid black;
     width: 100%;
     padding: 8px;
