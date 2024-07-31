@@ -24,6 +24,20 @@
         <input type="number" id="radius" value="4" step="0.1" min="4">
         <button onclick="generateRandomPoint()">Генерувати</button>
     </div>
+    <div id="user-list" class="container">
+        <h2>Список активних користувачів</h2>
+        <table id="user-table">
+            <thead>
+                <tr>
+                    <th>Ім'я користувача</th>
+                    <th>Досягнуті точки</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Користувачі будуть додані тут -->
+            </tbody>
+        </table>
+    </div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="script.js"></script>
     
