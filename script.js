@@ -21,22 +21,13 @@ function register() {
             username: username,
             pointsReached: 0
         };
-        saveUserToStorage(user);
+        localStorage.setItem("user", JSON.stringify(user));
         updateUserInfo();
         showMap();
         updateUserList();
     } else {
         alert("Будь ласка, введіть ім'я користувача.");
     }
-}
-
-function saveUserToStorage(user) {
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-    users = users.filter(u => u.username !== user.username);
-    users.push(user);
-    localStorage.setItem("users", JSON.stringify(users));
-    localStorage.setItem("user", JSON.stringify(user));
-    console.log('Users saved:', users); // Debugging line
 }
 
 function updateUserInfo() {
@@ -87,8 +78,7 @@ function updateUserLocation(position) {
     userLocation = [latitude, longitude];
 
     userMarker.setLatLng(userLocation);
-    // Прибираємо автоматичне переміщення карти
-    // map.panTo(userLocation);
+    // map.panTo(userLocation); // Видалено автоматичне переміщення карти до поточної позиції користувача
 
     checkProximity();
     console.log('updated');
@@ -131,7 +121,7 @@ function checkProximity() {
     const userLatLng = L.latLng(userLocation[0], userLocation[1]);
     const randomLatLng = randomMarker.getLatLng();
 
-    if (userLatLng.distanceTo(randomLatLng) < 50) { // 50 метрів для точності
+    if (userLatLng.distanceTo(randomLatLng) < 10) { // 50 метрів для точності
         onReachedRandomPoint();
     }
 }
@@ -139,29 +129,37 @@ function checkProximity() {
 function onReachedRandomPoint() {
     alert("Вітаємо! Ви досягли випадкової точки.");
     user.pointsReached += 1;
-    saveUserToStorage(user);
+    localStorage.setItem("user", JSON.stringify(user));
     updateUserInfo();
     map.removeLayer(randomMarker);
     randomMarker = null;
-    updateUserList();
 }
 
 function updateUserList() {
-    const userListContainer = document.getElementById('user-table').getElementsByTagName('tbody')[0];
-    userListContainer.innerHTML = "";
+    const userTable = document.getElementById('user-table').getElementsByTagName('tbody')[0];
+    userTable.innerHTML = '';
 
-    let users = JSON.parse(localStorage.getItem("users")) || [];
+    const users = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith('user_')) {
+            const user = JSON.parse(localStorage.getItem(key));
+            users.push(user);
+        }
+    }
+
     users.sort((a, b) => b.pointsReached - a.pointsReached);
 
     users.forEach(user => {
-        const row = userListContainer.insertRow();
+        const row = userTable.insertRow();
         const cell1 = row.insertCell(0);
         const cell2 = row.insertCell(1);
         cell1.textContent = user.username;
         cell2.textContent = user.pointsReached;
     });
-
-    console.log('User list updated:', users); // Debugging line
 }
 
-document.querySelector('button[onclick="updateUserList()"]').addEventListener('click', updateUserList);
+function clearUsers() {
+    localStorage.clear();
+    window.location.reload();
+}
