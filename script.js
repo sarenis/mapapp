@@ -29,7 +29,11 @@ function initializeMap(location) {
         .openPopup();
 
     // Почати відслідковувати позицію користувача
-    watchId = navigator.geolocation.watchPosition(updateUserLocation, handleGeolocationError);
+    watchId = navigator.geolocation.watchPosition(updateUserLocation, handleGeolocationError, {
+        enableHighAccuracy: true,
+        maximumAge: 1000,
+        timeout: 5000
+    });
 }
 
 function updateUserLocation(position) {
@@ -40,7 +44,7 @@ function updateUserLocation(position) {
     map.panTo(userLocation);  // Оновлення центру карти до поточної позиції користувача
 
     checkProximity();
-    console.log('updated')
+    console.log('updated');
 }
 
 function handleGeolocationError() {
@@ -64,7 +68,6 @@ function generateRandomPoint() {
     }
 
     let radiusKm = parseFloat(document.getElementById('radius').value);
-    
 
     const randomPoint = getRandomPoint(userLocation, radiusKm);
 
