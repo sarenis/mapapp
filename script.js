@@ -25,7 +25,6 @@ function register() {
         saveUser(user);
         updateUserInfo();
         showMap();
-        updateUserList();
     } else {
         alert("Будь ласка, введіть ім'я користувача.");
     }
@@ -148,25 +147,3 @@ function onReachedRandomPoint() {
     randomMarker = null;
 }
 
-function updateUserList() {
-    const userTable = document.getElementById('user-table').getElementsByTagName('tbody')[0];
-    userTable.innerHTML = '';
-
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-
-    users.sort((a, b) => b.pointsReached - a.pointsReached);
-
-    users.forEach(user => {
-        const row = userTable.insertRow();
-        const cell1 = row.insertCell(0);
-        const cell2 = row.insertCell(1);
-        cell1.textContent = user.username;
-        cell2.textContent = user.pointsReached;
-    });
-}
-
-function clearUsers() {
-    localStorage.removeItem("users");
-    localStorage.removeItem("currentUser");
-    window.location.reload();
-}
