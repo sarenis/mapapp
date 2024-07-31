@@ -107,8 +107,8 @@ function generateRandomPoint() {
     let maxRadiusKm = parseFloat(document.getElementById('max-radius').value);
 
     // Переконуємося, що мінімальний радіус не менше 4 км
-    if (isNaN(minRadiusKm) || minRadiusKm < 2.5) {
-        minRadiusKm = 2.5;
+    if (isNaN(minRadiusKm) || minRadiusKm < 2) {
+        minRadiusKm = 2;
         document.getElementById('min-radius').value = minRadiusKm;
     }
 
