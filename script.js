@@ -103,15 +103,22 @@ function generateRandomPoint() {
         map.removeLayer(randomMarker);
     }
 
-    let radiusKm = parseFloat(document.getElementById('radius').value);
+    let minRadiusKm = parseFloat(document.getElementById('min-radius').value);
+    let maxRadiusKm = parseFloat(document.getElementById('max-radius').value);
 
-    // Переконуємося, що радіус не менше 4 км
-    if (isNaN(radiusKm) || radiusKm < 4) {
-        radiusKm = 4;
-        document.getElementById('radius').value = radiusKm;
+    // Переконуємося, що мінімальний радіус не менше 4 км
+    if (isNaN(minRadiusKm) || minRadiusKm < 4) {
+        minRadiusKm = 4;
+        document.getElementById('min-radius').value = minRadiusKm;
     }
 
-    const randomPoint = getRandomPoint(userLocation, radiusKm);
+    // Переконуємося, що максимальний радіус не менше мінімального
+    if (isNaN(maxRadiusKm) || maxRadiusKm < minRadiusKm) {
+        maxRadiusKm = minRadiusKm;
+        document.getElementById('max-radius').value = maxRadiusKm;
+    }
+
+    const randomPoint = getRandomPoint(userLocation, minRadiusKm, maxRadiusKm);
 
     randomMarker = L.marker(randomPoint).addTo(map)
         .bindPopup(`Random Position: [${randomPoint[0].toFixed(5)}, ${randomPoint[1].toFixed(5)}]`)
@@ -120,9 +127,9 @@ function generateRandomPoint() {
     map.setView(randomPoint, 13);
 }
 
-function getRandomPoint(center, minRadiusKm) {
+function getRandomPoint(center, minRadiusKm, maxRadiusKm) {
     const angle = Math.random() * Math.PI * 2;
-    const distance = minRadiusKm; // Встановлюємо відстань на мінімально допустиму
+    const distance = Math.random() * (maxRadiusKm - minRadiusKm) + minRadiusKm; // Випадковий радіус в межах заданого діапазону
     const dx = distance * Math.cos(angle);
     const dy = distance * Math.sin(angle);
     const earthRadius = 6371; // Радіус Землі в км
@@ -130,6 +137,7 @@ function getRandomPoint(center, minRadiusKm) {
     const newLng = center[1] + (dx / earthRadius) * (180 / Math.PI) / Math.cos(center[0] * Math.PI / 180);
     return [newLat, newLng];
 }
+
 
 
 function checkProximity() {
