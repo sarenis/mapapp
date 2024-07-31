@@ -1,23 +1,22 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: black;
 }
 
 .container {
-    margin: 20px auto;
+    margin: 20px;
     border: 1px solid gray;
-    background-color: #AAAAAA;
+    background-color: black;
 }
 
-#registration, #user-info, #controls {
-    width: 100%;
+#registration, #user-info, #controls, #user-list {
+    width: 300px;
     margin: 20px auto;
 }
 
 #map {
-    margin: 20px auto;
     width: 100%;
     height: 100%;
+    margin: 20px auto;
 }
 
 input[type="text"], input[type="number"] {
@@ -30,7 +29,7 @@ input[type="text"], input[type="number"] {
 button {
     width: 100%;
     padding: 10px;
-    background-color: #1F1F1F;
+    background-color: yellow;
     color: white;
     border: none;
     border-radius: 5px;
@@ -43,4 +42,18 @@ button:hover {
 
 h2, h3 {
     text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
 }
