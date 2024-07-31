@@ -106,6 +106,6 @@ function checkProximity() {
 }
 
 function onReachedRandomPoint() {
-    alert("Вітаємо! Ви досягли випадкової точки.");
+    console.log("Вітаємо! Ви досягли випадкової точки.");
     // Можна додати інші дії тут
 }
