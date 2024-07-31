@@ -58,7 +58,15 @@ function generateRandomPoint() {
         routeControl = null;
     }
 
-    const radiusKm = parseFloat(document.getElementById('radius').value);
+    let radiusKm = parseFloat(document.getElementById('radius').value);
+    
+    // Перевірка мінімального радіуса
+    if (radiusKm < 4) {
+        alert("Мінімальний радіус становить 4 км");
+        radiusKm = 4;
+        document.getElementById('radius').value = 4;
+    }
+    
     const randomPoint = getRandomPoint(userLocation, radiusKm);
 
     randomMarker = L.marker(randomPoint).addTo(map)
