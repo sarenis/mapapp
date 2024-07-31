@@ -36,6 +36,7 @@ function saveUserToStorage(user) {
     users.push(user);
     localStorage.setItem("users", JSON.stringify(users));
     localStorage.setItem("user", JSON.stringify(user));
+    console.log('Users saved:', users); // Debugging line
 }
 
 function updateUserInfo() {
@@ -159,4 +160,8 @@ function updateUserList() {
         cell1.textContent = user.username;
         cell2.textContent = user.pointsReached;
     });
+
+    console.log('User list updated:', users); // Debugging line
 }
+
+document.querySelector('button[onclick="updateUserList()"]').addEventListener('click', updateUserList);
