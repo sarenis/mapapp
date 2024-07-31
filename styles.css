@@ -6,7 +6,7 @@ html {
 body {
     margin: 0;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    background-color: white;
+    background-color: #181818;
 
 }
 .btn1 {
@@ -37,7 +37,7 @@ body {
 
 .container {
     border: 1px solid orange;
-    background-color: gray;
+    background-color: #585858;
 }
 
 #registration, #user-info, #controls, #user-list {
