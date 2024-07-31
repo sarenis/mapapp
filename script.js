@@ -86,7 +86,8 @@ function updateUserLocation(position) {
     userLocation = [latitude, longitude];
 
     userMarker.setLatLng(userLocation);
-    // map.panTo(userLocation); // Прибираємо автоматичне переміщення карти
+    // Прибираємо автоматичне переміщення карти
+    // map.panTo(userLocation);
 
     checkProximity();
     console.log('updated');
