@@ -17,7 +17,7 @@
     <div id="user-info" class="container" style="display:none;">
         <h3>Ласкаво просимо, <span id="display-username"></span>!</h3>
         <p>Досягнуті точки: <span id="points-reached">0</span></p>
-        <button onclick="logout()">Вийти</button>
+        <button class='btn1' onclick="logout()">Вийти</button>
     </div>
     <div id="map" style="display:none; height: 400px;"></div>
     <div id="controls" class="container" style="display:none;">
@@ -27,6 +27,7 @@
         <input type="number" id="max-radius" value="2" step="0.1" min="2">
         <button onclick="generateRandomPoint()">Генерувати</button>
     </div>
+    <button class='btn2'onclick="logout()">Вийти</button>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="script.js"></script>
 </body>
