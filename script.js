@@ -41,6 +41,7 @@ function updateUserLocation(position) {
     userMarker.setLatLng(userLocation);
 
     checkProximity();
+    console.log('Updated');
 }
 
 function handleGeolocationError() {
