@@ -1,7 +1,6 @@
 let map;
 let userMarker;
 let randomMarker;
-let routeControl;
 let userLocation;
 let watchId;
 
@@ -62,14 +61,14 @@ function generateRandomPoint() {
     if (randomMarker) {
         map.removeLayer(randomMarker);
     }
-    if (routeControl) {
-        map.removeControl(routeControl);
-        routeControl = null;
-    }
 
     let radiusKm = parseFloat(document.getElementById('radius').value);
     
-    
+    if (radiusKm < 4) {
+        alert("Мінімальний радіус становить 4 км");
+        radiusKm = 4;
+        document.getElementById('radius').value = 4;
+    }
     
     const randomPoint = getRandomPoint(userLocation, radiusKm);
 
@@ -78,20 +77,6 @@ function generateRandomPoint() {
         .openPopup();
 
     map.setView(randomPoint, 13);
-}
-
-function buildRoute() {
-    if (routeControl) {
-        map.removeControl(routeControl);
-    }
-
-    routeControl = L.Routing.control({
-        waypoints: [
-            L.latLng(userLocation[0], userLocation[1]),
-            L.latLng(randomMarker.getLatLng().lat, randomMarker.getLatLng().lng)
-        ],
-        routeWhileDragging: true
-    }).addTo(map);
 }
 
 function checkProximity() {
