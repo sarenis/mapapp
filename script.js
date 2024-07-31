@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
         updateUserInfo();
         showMap();
     }
+    updateUserList();
 });
 
 function register() {
@@ -20,12 +21,21 @@ function register() {
             username: username,
             pointsReached: 0
         };
-        localStorage.setItem("user", JSON.stringify(user));
+        saveUserToStorage(user);
         updateUserInfo();
         showMap();
+        updateUserList();
     } else {
         alert("Будь ласка, введіть ім'я користувача.");
     }
+}
+
+function saveUserToStorage(user) {
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    users = users.filter(u => u.username !== user.username);
+    users.push(user);
+    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("user", JSON.stringify(user));
 }
 
 function updateUserInfo() {
@@ -127,8 +137,25 @@ function checkProximity() {
 function onReachedRandomPoint() {
     alert("Вітаємо! Ви досягли випадкової точки.");
     user.pointsReached += 1;
-    localStorage.setItem("user", JSON.stringify(user));
+    saveUserToStorage(user);
     updateUserInfo();
     map.removeLayer(randomMarker);
     randomMarker = null;
+    updateUserList();
+}
+
+function updateUserList() {
+    const userListContainer = document.getElementById('user-table').getElementsByTagName('tbody')[0];
+    userListContainer.innerHTML = "";
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    users.sort((a, b) => b.pointsReached - a.pointsReached);
+
+    users.forEach(user => {
+        const row = userListContainer.insertRow();
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+        cell1.textContent = user.username;
+        cell2.textContent = user.pointsReached;
+    });
 }
