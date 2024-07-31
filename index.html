@@ -8,8 +8,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="map"></div>
-    <div id="controls">
+    <div id="registration">
+        <h2>Реєстрація</h2>
+        <label for="username">Ім'я користувача:</label>
+        <input type="text" id="username">
+        <button onclick="register()">Зареєструватися</button>
+    </div>
+    <div id="user-info" style="display:none;">
+        <h3>Ласкаво просимо, <span id="display-username"></span>!</h3>
+        <p>Досягнуті точки: <span id="points-reached">0</span></p>
+    </div>
+    <div id="map" style="display:none;"></div>
+    <div id="controls" style="display:none;">
         <label for="radius">Radius (km):</label>
         <input type="number" id="radius" value="4" step="0.1" min="4">
         <button onclick="generateRandomPoint()">Генерувати</button>
