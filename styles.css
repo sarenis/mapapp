@@ -6,8 +6,7 @@ body {
 .container {
     margin: 20px auto;
     border: 1px solid red;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    background-color: #AAAAAA;
 }
 
 #registration, #user-info, #controls {
@@ -31,7 +30,7 @@ input[type="text"], input[type="number"] {
 button {
     width: 100%;
     padding: 10px;
-    background-color: #4CAF50;
+    background-color: #1F1F1F;
     color: white;
     border: none;
     border-radius: 5px;
