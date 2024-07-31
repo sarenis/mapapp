@@ -3,19 +3,55 @@ let userMarker;
 let randomMarker;
 let userLocation;
 let watchId;
+let user;
 
-navigator.geolocation.getCurrentPosition(position => {
-    const { latitude, longitude } = position.coords;
-    userLocation = [latitude, longitude];
-
-    initializeMap(userLocation);
-}, () => {
-    const defaultLat = 51.505;
-    const defaultLng = -0.09;
-    userLocation = [defaultLat, defaultLng];
-
-    initializeMap(userLocation);
+document.addEventListener("DOMContentLoaded", function() {
+    if (localStorage.getItem("user")) {
+        user = JSON.parse(localStorage.getItem("user"));
+        updateUserInfo();
+        showMap();
+    }
 });
+
+function register() {
+    const username = document.getElementById('username').value;
+    if (username) {
+        user = {
+            username: username,
+            pointsReached: 0
+        };
+        localStorage.setItem("user", JSON.stringify(user));
+        updateUserInfo();
+        showMap();
+    } else {
+        alert("Будь ласка, введіть ім'я користувача.");
+    }
+}
+
+function updateUserInfo() {
+    document.getElementById('display-username').textContent = user.username;
+    document.getElementById('points-reached').textContent = user.pointsReached;
+    document.getElementById('user-info').style.display = 'block';
+}
+
+function showMap() {
+    document.getElementById('registration').style.display = 'none';
+    document.getElementById('map').style.display = 'block';
+    document.getElementById('controls').style.display = 'block';
+    
+    navigator.geolocation.getCurrentPosition(position => {
+        const { latitude, longitude } = position.coords;
+        userLocation = [latitude, longitude];
+
+        initializeMap(userLocation);
+    }, () => {
+        const defaultLat = 51.505;
+        const defaultLng = -0.09;
+        userLocation = [defaultLat, defaultLng];
+
+        initializeMap(userLocation);
+    });
+}
 
 function initializeMap(location) {
     map = L.map('map').setView(location, 13);
@@ -84,12 +120,16 @@ function checkProximity() {
     const userLatLng = L.latLng(userLocation[0], userLocation[1]);
     const randomLatLng = randomMarker.getLatLng();
 
-    if (userLatLng.distanceTo(randomLatLng) < 10) { // 50 метрів для точності
+    if (userLatLng.distanceTo(randomLatLng) < 50) { // 50 метрів для точності
         onReachedRandomPoint();
     }
 }
 
 function onReachedRandomPoint() {
     alert("Вітаємо! Ви досягли випадкової точки.");
-    // Можна додати інші дії тут
+    user.pointsReached += 1;
+    localStorage.setItem("user", JSON.stringify(user));
+    updateUserInfo();
+    map.removeLayer(randomMarker);
+    randomMarker = null;
 }
