@@ -1,15 +1,17 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: black;
+
 }
 
 .container {
     margin: 20px;
     border: 1px solid gray;
-    background-color: black;
+    background-color: white;
 }
 
 #registration, #user-info, #controls, #user-list {
-    width: 300px;
+    width: 100%;
     margin: 20px auto;
 }
 
