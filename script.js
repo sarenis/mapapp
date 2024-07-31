@@ -6,8 +6,8 @@ let watchId;
 let user;
 
 document.addEventListener("DOMContentLoaded", function() {
-    if (localStorage.getItem("user")) {
-        user = JSON.parse(localStorage.getItem("user"));
+    if (localStorage.getItem("currentUser")) {
+        user = JSON.parse(localStorage.getItem("currentUser"));
         updateUserInfo();
         showMap();
     }
@@ -21,13 +21,25 @@ function register() {
             username: username,
             pointsReached: 0
         };
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("currentUser", JSON.stringify(user));
+        saveUser(user);
         updateUserInfo();
         showMap();
         updateUserList();
     } else {
         alert("Будь ласка, введіть ім'я користувача.");
     }
+}
+
+function saveUser(newUser) {
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    const existingUserIndex = users.findIndex(u => u.username === newUser.username);
+    if (existingUserIndex !== -1) {
+        users[existingUserIndex] = newUser;
+    } else {
+        users.push(newUser);
+    }
+    localStorage.setItem("users", JSON.stringify(users));
 }
 
 function updateUserInfo() {
@@ -78,7 +90,6 @@ function updateUserLocation(position) {
     userLocation = [latitude, longitude];
 
     userMarker.setLatLng(userLocation);
-    // map.panTo(userLocation); // Видалено автоматичне переміщення карти до поточної позиції користувача
 
     checkProximity();
     console.log('updated');
@@ -129,8 +140,10 @@ function checkProximity() {
 function onReachedRandomPoint() {
     alert("Вітаємо! Ви досягли випадкової точки.");
     user.pointsReached += 1;
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("currentUser", JSON.stringify(user));
+    saveUser(user);
     updateUserInfo();
+    updateUserList();
     map.removeLayer(randomMarker);
     randomMarker = null;
 }
@@ -139,14 +152,7 @@ function updateUserList() {
     const userTable = document.getElementById('user-table').getElementsByTagName('tbody')[0];
     userTable.innerHTML = '';
 
-    const users = [];
-    for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key.startsWith('user_')) {
-            const user = JSON.parse(localStorage.getItem(key));
-            users.push(user);
-        }
-    }
+    const users = JSON.parse(localStorage.getItem("users")) || [];
 
     users.sort((a, b) => b.pointsReached - a.pointsReached);
 
@@ -160,6 +166,7 @@ function updateUserList() {
 }
 
 function clearUsers() {
-    localStorage.clear();
+    localStorage.removeItem("users");
+    localStorage.removeItem("currentUser");
     window.location.reload();
 }
