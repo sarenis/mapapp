@@ -4,6 +4,7 @@ body {
 
 }
 .btn1 {
+    padding: 10px;
     width: 100%;
     background-color: green;
     color: white;
