@@ -40,6 +40,7 @@ function updateUserLocation(position) {
     map.panTo(userLocation);  // Оновлення центру карти до поточної позиції користувача
 
     checkProximity();
+    console.log('updated')
 }
 
 function handleGeolocationError() {
@@ -91,6 +92,6 @@ function checkProximity() {
 }
 
 function onReachedRandomPoint() {
-    alert("Вітаємо! Ви досягли випадкової точки.");
+    console.log("Вітаємо! Ви досягли випадкової точки.");
     // Можна додати інші дії тут
 }
