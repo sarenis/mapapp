@@ -15,6 +15,11 @@ body {
 }
 
 .btn2 {
+    position: absolute;
+    bottom: 10px; /* Відступ від низу сторінки */
+    left: 50%;
+    transform: translateX(-50%);
+
     width: 100%;
     padding: 10px;
     background-color: red;
