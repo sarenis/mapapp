@@ -64,7 +64,6 @@ function initializeMap(location) {
         .bindPopup('You are here!')
         .openPopup();
 
-    // Почати відслідковувати позицію користувача
     watchId = navigator.geolocation.watchPosition(updateUserLocation, handleGeolocationError, {
         enableHighAccuracy: true,
         maximumAge: 1000,
@@ -77,7 +76,7 @@ function updateUserLocation(position) {
     userLocation = [latitude, longitude];
 
     userMarker.setLatLng(userLocation);
-    map.panTo(userLocation);  // Оновлення центру карти до поточної позиції користувача
+    // map.panTo(userLocation); // Прибираємо автоматичне переміщення карти
 
     checkProximity();
     console.log('updated');
@@ -120,7 +119,7 @@ function checkProximity() {
     const userLatLng = L.latLng(userLocation[0], userLocation[1]);
     const randomLatLng = randomMarker.getLatLng();
 
-    if (userLatLng.distanceTo(randomLatLng) < 10) { // 50 метрів для точності
+    if (userLatLng.distanceTo(randomLatLng) < 50) { // 50 метрів для точності
         onReachedRandomPoint();
     }
 }
