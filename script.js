@@ -24,10 +24,14 @@ function register() {
         saveUser(user);
         updateUserInfo();
         showMap();
+
+        // Показуємо кнопку особистого кабінету після реєстрації
+        document.getElementById('user-profile').style.display = 'block';
     } else {
         alert("Будь ласка, введіть ім'я користувача.");
     }
 }
+
 
 function saveUser(newUser) {
     let users = JSON.parse(localStorage.getItem("users")) || [];
