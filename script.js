@@ -150,7 +150,7 @@ function generateRandomPoint() {
     const randomPoint = getRandomPoint(userLocation, minRadiusKm, maxRadiusKm);
 
     randomMarker = L.marker(randomPoint).addTo(map)
-        .bindPopup(`Random Position`)
+        .bindPopup(`Рандомна позиція`)
         .openPopup();
 
     map.setView(randomPoint, 13);
