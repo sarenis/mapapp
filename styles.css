@@ -157,4 +157,5 @@ h2, h3 {
     top: 40%;
     width:20%;
     height: 20%;
+    overflow: auto;
 }
