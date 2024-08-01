@@ -125,20 +125,15 @@ h2, h3 {
 }
 
 .modal-content {
-    background-color: #fff; /* Білий фон для контрасту */
-    color: #333; /* Темніший текст */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.modal-content {
-    background-color: #eeeeee;
+    background-color: #eeeeee; /* Білий фон для контрасту */
     margin: 15% auto;
-    padding: 20px;
     border: 1px solid #888;
     width: 80%;
     max-width: 400px;
     border-radius: 8px;
+    color: #333; /* Темніший текст */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .close-btn {
