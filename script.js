@@ -5,6 +5,18 @@ let userLocation;
 let watchId;
 let user;
 
+
+document.addEventListener("DOMContentLoaded", function() {
+    if (localStorage.getItem("currentUser")) {
+        user = JSON.parse(localStorage.getItem("currentUser"));
+        updateUserInfo();
+        showMap();
+
+        // Показуємо кнопку, якщо користувач вже зареєстрований
+        document.getElementById('user-profile').style.display = 'block';
+    }
+});
+
 document.addEventListener("DOMContentLoaded", function() {
     if (localStorage.getItem("currentUser")) {
         user = JSON.parse(localStorage.getItem("currentUser"));
