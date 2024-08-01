@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Map Position</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    
 </head>
 <body>
     <div id="registration" class="container">
@@ -26,7 +31,7 @@
     </div>
 
     <button id="user-profile" class="profile-btn" onclick="openProfile()">Особистий кабінет</button>
-    <button id="toggle-routing" class="profile-btn">Навігація</button>
+
 
     <div id="profile-modal" class="modal">
         <div class="modal-content">
@@ -37,7 +42,7 @@
             <button class="btn2" onclick="logout()">Вийти з акаунту</button>
         </div>
     </div>
-
+    
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
     <script src="script.js"></script>
