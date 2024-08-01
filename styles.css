@@ -76,7 +76,7 @@ input[type="text"], input[type="number"] {
 /* Headings */
 h2, h3 {
     text-align: center;
-    color: #eeeeee;
+    color: black;
     font-weight: 600;
     margin-bottom: 16px;
 }
