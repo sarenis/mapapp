@@ -1,67 +1,86 @@
-html {
-    line-height: 1.15;
-    -webkit-text-size-adjust: 100%;
-}
-
+/* Overall Body Styling */
 body {
     margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    background-color: #181818;
-
-}
-.btn1 {
-    padding: 10px;
-    width: 100%;
-    background-color: green;
-    color: white;
-    cursor: pointer;
-    
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #121212;
+    color: #f5f5f5;
 }
 
-.btn2 {
-    position: absolute;
-    bottom: 10px; /* Відступ від низу сторінки */
-    left: 50%;
-    transform: translateX(-50%);
-
-    width: 100%;
-    padding: 10px;
-    background-color: red;
-    color: white;
+/* Buttons */
+.btn1, .btn2 {
+    padding: 12px;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    transition: background-color 0.3s ease;
 }
 
-.container {
-    border: 3px solid black;
-    background-color: #585858;
+.btn1 {
+    background-color: #4CAF50;
+    color: #fff;
 }
 
-#registration, #user-info, #controls, #user-list {
-    width: 100%;
-}
-
-#map {
-    width: 100%;
-    height: 600px;
-}
-
-input[type="text"], input[type="number"] {
-    background-color: #686868;
-    border: 1px solid black;
-    width: 100%;
-    padding: 8px;
-    margin: 8px 0;
-    box-sizing: border-box;
-}
-
-
-button:hover {
+.btn1:hover {
     background-color: #45a049;
 }
 
+.btn2 {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.btn2:hover {
+    background-color: #d32f2f;
+}
+
+/* Container Styling */
+.container {
+    border: 2px solid #333;
+    background-color: #282828;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Map Styling */
+#map {
+    width: 100%;
+    height: 600px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Inputs */
+input[type="text"], input[type="number"] {
+    background-color: #383838;
+    border: 1px solid #444;
+    color: #fff;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Headings */
 h2, h3 {
     text-align: center;
+    color: #eeeeee;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+/* Adjusting the position of btn2 */
+.btn2 {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    background-color: #ff5252;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
