@@ -15,10 +15,7 @@
         <input type="text" id="username">
         <button onclick="register()">Зареєструватися</button>
     </div>
-    <div id="user-info" class="container" style="display:none;">
-        <h3>Ласкаво просимо, <span id="display-username"></span>!</h3>
-        <p>Досягнуті точки: <span id="points-reached">0</span></p>
-    </div>
+
     <div id="map"></div>
     <div id="controls" class="container" style="display:none;">
         <label for="min-radius">Мінімальний радіус (км):</label>
@@ -27,7 +24,19 @@
         <input type="number" id="max-radius" value="2" step="0.1" min="2">
         <button class='btn1' onclick="generateRandomPoint()">Генерувати</button>
     </div>
-    <button class='btn2'onclick="logout()">Вийти</button>
+
+    <button class="profile-btn" onclick="openProfile()">Особистий кабінет</button>
+
+    <div id="profile-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeProfile()">&times;</span>
+            <h3>Акаунт користувача</h3>
+            <p>Ім'я: <span id="modal-username"></span></p>
+            <p>Досягнуті точки: <span id="modal-points-reached"></span></p>
+            <button class="btn2" onclick="logout()">Вийти з акаунту</button>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="script.js"></script>
 </body>
