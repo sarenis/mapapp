@@ -190,6 +190,9 @@ function logout() {
     document.getElementById('modal-username').textContent = '';
     document.getElementById('modal-points-reached').textContent = '';
 
+    // Приховуємо кнопку особистого кабінету
+    document.getElementById('user-profile').style.display = 'none';
+
     // Показуємо форму реєстрації та ховаємо інші елементи
     document.getElementById('registration').style.display = 'block';
     document.getElementById('user-info').style.display = 'none';
