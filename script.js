@@ -7,12 +7,21 @@ let user;
 let routingControl;
 
 document.addEventListener("DOMContentLoaded", function() {
+    const toggleRoutingButton = document.getElementById('toggle-routing');
+    const routingContainer = document.querySelector('.leaflet-routing-container');
+
+    toggleRoutingButton.addEventListener('click', function() {
+        if (routingContainer.style.display === 'none' || routingContainer.style.display === '') {
+            routingContainer.style.display = 'block';
+        } else {
+            routingContainer.style.display = 'none';
+        }
+    });
+
     if (localStorage.getItem("currentUser")) {
         user = JSON.parse(localStorage.getItem("currentUser"));
         updateUserInfo();
         showMap();
-
-        // Показуємо кнопку, якщо користувач вже зареєстрований
         document.getElementById('user-profile').style.display = 'block';
     }
 });
@@ -144,13 +153,13 @@ function generateRandomPoint() {
 
     map.setView(randomPoint, 13);
 
-    // Прокладаємо маршрут
     if (routingControl) {
         routingControl.setWaypoints([L.latLng(userLocation), L.latLng(randomPoint)]);
     } else {
         routingControl = L.Routing.control({
             waypoints: [L.latLng(userLocation), L.latLng(randomPoint)],
-            routeWhileDragging: true
+            routeWhileDragging: true,
+            serviceUrl: 'https://router.project-osrm.org/route/v1'
         }).addTo(map);
     }
 }
