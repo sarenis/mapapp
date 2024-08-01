@@ -41,9 +41,23 @@ function saveUser(newUser) {
 }
 
 function updateUserInfo() {
-    document.getElementById('display-username').textContent = user.username;
-    document.getElementById('points-reached').textContent = user.pointsReached;
-    document.getElementById('user-info').style.display = 'block';
+    const usernameElement = document.getElementById('display-username');
+    const pointsElement = document.getElementById('points-reached');
+    const userInfoElement = document.getElementById('user-info');
+
+    if (usernameElement && pointsElement && userInfoElement) {
+        usernameElement.textContent = user.username;
+        pointsElement.textContent = user.pointsReached;
+        userInfoElement.style.display = 'block';
+    }
+
+    const modalUsernameElement = document.getElementById('modal-username');
+    const modalPointsElement = document.getElementById('modal-points-reached');
+
+    if (modalUsernameElement && modalPointsElement) {
+        modalUsernameElement.textContent = user.username;
+        modalPointsElement.textContent = user.pointsReached;
+    }
 }
 
 function showMap() {
