@@ -114,6 +114,9 @@ h2, h3 {
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
 }
+#user-profile {
+    display: none; /* Приховуємо кнопку */
+}
 #modal-username,
 #modal-points-reached {
     color: #333; /* Темніший колір для кращої читабельності */
