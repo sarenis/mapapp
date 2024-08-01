@@ -154,8 +154,5 @@ h2, h3 {
 }
 
 .leaflet-right {
-    top: 40%;
-    width:30%;
-    height: 50%;
-    overflow: auto;
+    display: none;
 }
