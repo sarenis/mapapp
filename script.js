@@ -4,7 +4,7 @@ let randomMarker;
 let userLocation;
 let watchId;
 let user;
-
+let routingControl;
 
 document.addEventListener("DOMContentLoaded", function() {
     if (localStorage.getItem("currentUser")) {
@@ -14,14 +14,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Показуємо кнопку, якщо користувач вже зареєстрований
         document.getElementById('user-profile').style.display = 'block';
-    }
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-    if (localStorage.getItem("currentUser")) {
-        user = JSON.parse(localStorage.getItem("currentUser"));
-        updateUserInfo();
-        showMap();
     }
 });
 
@@ -43,7 +35,6 @@ function register() {
         alert("Будь ласка, введіть ім'я користувача.");
     }
 }
-
 
 function saveUser(newUser) {
     let users = JSON.parse(localStorage.getItem("users")) || [];
@@ -135,13 +126,11 @@ function generateRandomPoint() {
     let minRadiusKm = parseFloat(document.getElementById('min-radius').value);
     let maxRadiusKm = parseFloat(document.getElementById('max-radius').value);
 
-    // Переконуємося, що мінімальний радіус не менше 4 км
     if (isNaN(minRadiusKm) || minRadiusKm < 2) {
         minRadiusKm = 2;
         document.getElementById('min-radius').value = minRadiusKm;
     }
 
-    // Переконуємося, що максимальний радіус не менше мінімального
     if (isNaN(maxRadiusKm) || maxRadiusKm < minRadiusKm) {
         maxRadiusKm = minRadiusKm;
         document.getElementById('max-radius').value = maxRadiusKm;
@@ -154,20 +143,28 @@ function generateRandomPoint() {
         .openPopup();
 
     map.setView(randomPoint, 13);
+
+    // Прокладаємо маршрут
+    if (routingControl) {
+        routingControl.setWaypoints([L.latLng(userLocation), L.latLng(randomPoint)]);
+    } else {
+        routingControl = L.Routing.control({
+            waypoints: [L.latLng(userLocation), L.latLng(randomPoint)],
+            routeWhileDragging: true
+        }).addTo(map);
+    }
 }
 
 function getRandomPoint(center, minRadiusKm, maxRadiusKm) {
     const angle = Math.random() * Math.PI * 2;
-    const distance = Math.random() * (maxRadiusKm - minRadiusKm) + minRadiusKm; // Випадковий радіус в межах заданого діапазону
+    const distance = Math.random() * (maxRadiusKm - minRadiusKm) + minRadiusKm;
     const dx = distance * Math.cos(angle);
     const dy = distance * Math.sin(angle);
-    const earthRadius = 6371; // Радіус Землі в км
+    const earthRadius = 6371;
     const newLat = center[0] + (dy / earthRadius) * (180 / Math.PI);
     const newLng = center[1] + (dx / earthRadius) * (180 / Math.PI) / Math.cos(center[0] * Math.PI / 180);
     return [newLat, newLng];
 }
-
-
 
 function checkProximity() {
     if (!randomMarker) return;
@@ -175,7 +172,7 @@ function checkProximity() {
     const userLatLng = L.latLng(userLocation[0], userLocation[1]);
     const randomLatLng = randomMarker.getLatLng();
 
-    if (userLatLng.distanceTo(randomLatLng) < 25) { // 50 метрів для точності
+    if (userLatLng.distanceTo(randomLatLng) < 25) {
         onReachedRandomPoint();
     }
 }
@@ -189,6 +186,10 @@ function onReachedRandomPoint() {
     updateUserList();
     map.removeLayer(randomMarker);
     randomMarker = null;
+
+    if (routingControl) {
+        routingControl.setWaypoints([]);
+    }
 }
 
 function logout() {
@@ -215,7 +216,6 @@ function logout() {
     if (map) map.style.display = 'none';
     if (controls) controls.style.display = 'none';
 
-    // Припустимо, що watchId та randomMarker визначені в іншому місці
     if (typeof watchId !== 'undefined' && watchId !== null) {
         navigator.geolocation.clearWatch(watchId);
         watchId = null;
@@ -229,7 +229,6 @@ function logout() {
     location.reload();
 }
 
-
 function openProfile() {
     document.getElementById('modal-username').textContent = user.username;
     document.getElementById('modal-points-reached').textContent = user.pointsReached;
@@ -239,5 +238,3 @@ function openProfile() {
 function closeProfile() {
     document.getElementById('profile-modal').style.display = 'none';
 }
-
-
