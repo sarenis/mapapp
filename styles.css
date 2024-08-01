@@ -152,3 +152,8 @@ h2, h3 {
     text-decoration: none;
     cursor: pointer;
 }
+
+.leaflet-routing-container leaflet-bar leaflet-control{
+    margin-top : 100px;
+    
+}
