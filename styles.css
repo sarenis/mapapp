@@ -155,4 +155,6 @@ h2, h3 {
 
 .leaflet-top {
     top: 40%;
+    width:20%;
+    height: 20%;
 }
