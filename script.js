@@ -183,7 +183,6 @@ function onReachedRandomPoint() {
     localStorage.setItem("currentUser", JSON.stringify(user));
     saveUser(user);
     updateUserInfo();
-    updateUserList();
     map.removeLayer(randomMarker);
     randomMarker = null;
 
