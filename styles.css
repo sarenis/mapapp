@@ -119,13 +119,13 @@ h2, h3 {
 }
 #modal-username,
 #modal-points-reached {
-    color: #333; /* Темніший колір для кращої читабельності */
+    color: #eeeeee; /* Темніший колір для кращої читабельності */
     font-weight: bold; /* Жирний текст для виділення */
     font-size: 16px; /* Розмір тексту */
 }
 
 .modal-content {
-    background-color: #736D69; /* Білий фон для контрасту */
+    background-color: #111111; /* Білий фон для контрасту */
     margin: 15% auto;
     border: 1px solid #888;
     width: 80%;
