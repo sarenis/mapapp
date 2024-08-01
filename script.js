@@ -121,7 +121,7 @@ function generateRandomPoint() {
     const randomPoint = getRandomPoint(userLocation, minRadiusKm, maxRadiusKm);
 
     randomMarker = L.marker(randomPoint).addTo(map)
-        .bindPopup(`Random Position: [${distanse}]`)
+        .bindPopup(`Random Position: [${randomPoint[0].toFixed(5)}, ${randomPoint[1].toFixed(5)}]`)
         .openPopup();
 
     map.setView(randomPoint, 13);
