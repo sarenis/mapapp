@@ -203,7 +203,11 @@ function logout() {
         map.removeLayer(randomMarker);
         randomMarker = null;
     }
+
+    // Оновлюємо сторінку, щоб очистити кеш
+    location.reload();
 }
+
 
 function openProfile() {
     document.getElementById('modal-username').textContent = user.username;
