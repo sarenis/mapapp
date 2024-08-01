@@ -175,7 +175,7 @@ function checkProximity() {
     const userLatLng = L.latLng(userLocation[0], userLocation[1]);
     const randomLatLng = randomMarker.getLatLng();
 
-    if (userLatLng.distanceTo(randomLatLng) < 10) { // 50 метрів для точності
+    if (userLatLng.distanceTo(randomLatLng) < 25) { // 50 метрів для точності
         onReachedRandomPoint();
     }
 }
