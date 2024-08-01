@@ -74,7 +74,7 @@ function initializeMap(location) {
     }).addTo(map);
 
     userMarker = L.marker(location).addTo(map)
-        .bindPopup('You are here!')
+        .bindPopup('Ти тут!')
         .openPopup();
 
     watchId = navigator.geolocation.watchPosition(updateUserLocation, handleGeolocationError, {
@@ -121,7 +121,7 @@ function generateRandomPoint() {
     const randomPoint = getRandomPoint(userLocation, minRadiusKm, maxRadiusKm);
 
     randomMarker = L.marker(randomPoint).addTo(map)
-        .bindPopup(`Random Position: [${randomPoint[0].toFixed(5)}, ${randomPoint[1].toFixed(5)}]`)
+        .bindPopup(`Random Position: [${distanse}]`)
         .openPopup();
 
     map.setView(randomPoint, 13);
