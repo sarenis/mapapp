@@ -131,7 +131,7 @@ h2, h3 {
     width: 80%;
     max-width: 400px;
     border-radius: 8px;
-    color: #333; /* Темніший текст */
+    color: #eeeeee; /* Темніший текст */
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
