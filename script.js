@@ -192,38 +192,40 @@ function onReachedRandomPoint() {
 }
 
 function logout() {
-    // Видаляємо інформацію про поточного користувача
     localStorage.removeItem("currentUser");
 
-    // Очищуємо текстові поля
-    document.getElementById('display-username').textContent = '';
-    document.getElementById('points-reached').textContent = '';
+    const displayUsername = document.getElementById('display-username');
+    const pointsReached = document.getElementById('points-reached');
+    const modalUsername = document.getElementById('modal-username');
+    const modalPointsReached = document.getElementById('modal-points-reached');
+    const userProfile = document.getElementById('user-profile');
+    const registration = document.getElementById('registration');
+    const userInfo = document.getElementById('user-info');
+    const map = document.getElementById('map');
+    const controls = document.getElementById('controls');
 
-    document.getElementById('modal-username').textContent = '';
-    document.getElementById('modal-points-reached').textContent = '';
+    if (displayUsername) displayUsername.textContent = '';
+    if (pointsReached) pointsReached.textContent = '';
+    if (modalUsername) modalUsername.textContent = '';
+    if (modalPointsReached) modalPointsReached.textContent = '';
 
-    // Приховуємо кнопку особистого кабінету
-    document.getElementById('user-profile').style.display = 'none';
+    if (userProfile) userProfile.style.display = 'none';
+    if (registration) registration.style.display = 'block';
+    if (userInfo) userInfo.style.display = 'none';
+    if (map) map.style.display = 'none';
+    if (controls) controls.style.display = 'none';
 
-    // Показуємо форму реєстрації та ховаємо інші елементи
-    document.getElementById('registration').style.display = 'block';
-    document.getElementById('user-info').style.display = 'none';
-    document.getElementById('map').style.display = 'none';
-    document.getElementById('controls').style.display = 'none';
-
-    // Якщо є спостереження за геопозицією, зупиняємо його
-    if (watchId) {
+    // Припустимо, що watchId та randomMarker визначені в іншому місці
+    if (typeof watchId !== 'undefined' && watchId !== null) {
         navigator.geolocation.clearWatch(watchId);
         watchId = null;
     }
 
-    // Видаляємо маркер випадкової точки, якщо він є
-    if (randomMarker) {
+    if (typeof randomMarker !== 'undefined' && randomMarker !== null) {
         map.removeLayer(randomMarker);
         randomMarker = null;
     }
 
-    // Оновлюємо сторінку, щоб очистити кеш
     location.reload();
 }
 
