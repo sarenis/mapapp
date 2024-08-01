@@ -36,6 +36,7 @@ body {
     font-weight: 600;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
+    z-index: 1000; /* Задання пріоритету відображення поверх інших елементів */
 }
 
 .btn2:hover {
