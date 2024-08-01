@@ -183,3 +183,31 @@ function logout() {
         randomMarker = null;
     }
 }
+
+function openProfile() {
+    document.getElementById('modal-username').textContent = user.username;
+    document.getElementById('modal-points-reached').textContent = user.pointsReached;
+    document.getElementById('profile-modal').style.display = 'block';
+}
+
+function closeProfile() {
+    document.getElementById('profile-modal').style.display = 'none';
+}
+
+function logout() {
+    localStorage.removeItem("currentUser");
+    document.getElementById('registration').style.display = 'block';
+    document.getElementById('map').style.display = 'none';
+    document.getElementById('controls').style.display = 'none';
+    document.getElementById('profile-modal').style.display = 'none';
+
+    if (watchId) {
+        navigator.geolocation.clearWatch(watchId);
+        watchId = null;
+    }
+
+    if (randomMarker) {
+        map.removeLayer(randomMarker);
+        randomMarker = null;
+    }
+}
