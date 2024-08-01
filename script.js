@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function() {
         updateUserInfo();
         showMap();
     }
-    updateUserList();
 });
 
 function register() {
