@@ -179,6 +179,13 @@ function logout() {
     // Видаляємо інформацію про поточного користувача
     localStorage.removeItem("currentUser");
 
+    // Очищуємо текстові поля
+    document.getElementById('display-username').textContent = '';
+    document.getElementById('points-reached').textContent = '';
+
+    document.getElementById('modal-username').textContent = '';
+    document.getElementById('modal-points-reached').textContent = '';
+
     // Показуємо форму реєстрації та ховаємо інші елементи
     document.getElementById('registration').style.display = 'block';
     document.getElementById('user-info').style.display = 'none';
